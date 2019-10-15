@@ -12,4 +12,11 @@ def hello():
 @app.route("/deinfo")
 def uepg():
     return "<h3> Ola UEPG </h3>"
+
+@app.route("/deinfo/<nome>")
+def deinfo_nome(nome):
+    if nome.lower() == "luciano":
+        return  "Ola {}".format(nome), 200
+    else:
+        return "Nao encontrado", 404 
     
