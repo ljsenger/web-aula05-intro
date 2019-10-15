@@ -1,13 +1,22 @@
-from flask import Flask
-
+from flask import Flask, request, render_template
 
 app = Flask("app")
+
+@app.route("/login", methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("form.html")
+    if request.method == 'POST':
+        nome = request.form['nome']
+        senha = request.form['passwd']
+        return u"Olá {}, sua senha é: {}".format(nome,senha)
+
 
 # view / rota
 @app.route("/")
 def hello():
-    return "<h1> Ola Mundo, <strong> estou aprendendo o framework Flask </strong> </h1> ", 200
-
+    return "Ola Mundo por meio do método {}".format(request.method)
+    
 @app.route("/uepg")
 @app.route("/deinfo")
 def uepg():
@@ -20,3 +29,5 @@ def deinfo_nome(nome):
     else:
         return "Nao encontrado", 404 
     
+
+        
